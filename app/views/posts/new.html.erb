@@ -1,5 +1,7 @@
 <%= form_for @post do |f| %>
+  <%= hidden_field :user_id %>
   <%= f.label :text %>
   <%= f.text_field :content %>
-  <%= f.submit "Create"  %>
+  <%= f.submit "Create" %>
 <% end %>
+<%= button_to "Comment", new_comment_path, method: "get" %>

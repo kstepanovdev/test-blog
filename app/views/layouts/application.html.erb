@@ -9,6 +9,15 @@
   </head>
 
   <body>
+    <header>
+      <% if signed_in? %>
+        You are logged as <%= current_user.email %>
+        <%= link_to "Profile", current_user %>
+        <%= link_to "Settings", edit_user_path(current_user) %>
+        <%= link_to "Logout", logout_path %>
+      <% end %>
+    </header>
+
     <%= yield %>
   </body>
 </html>
