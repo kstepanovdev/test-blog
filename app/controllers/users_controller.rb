@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show   
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
   end
 
   def edit
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         login @user
-        format.html { redirect_back_or_to @user, notice: "User was succesfully created" }
+        format.html { redirect_to posts_path, notice: "User was succesfully created" }
       else
         format.html { render :new }
       end
@@ -43,9 +44,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_path
+    respond_to do |format|
+      @user = User.find(params[:id])
+      if @user.destroy
+        format.html { redirect_to users_path, notice: "User was deleted" }
+        format.js {}
+      end
+    end
   end
 
   private
@@ -55,21 +60,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :nickname)
-  end
-
-  def required_login
-    redirect_to login_path, notice: "Please log in." unless signed_in?
-  end
-
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to login_url, notice: "Please log in."
-    end
-  end
-
-  def admin_user
-    redirect_to root_path unless current_user.admin?
   end
 
 end
