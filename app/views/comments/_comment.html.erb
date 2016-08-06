@@ -5,6 +5,7 @@
       <%= comment.user.nickname %>
     </div>
     <%= comment.content %>
+    <h6>Posted <%= time_ago_in_words(comment.created_at) %> ago.</h6>
     <% if current_user == comment.user || current_user.admin? %>
         |<%= link_to 'Edit', edit_post_comment_url(comment.post, comment) %>
         |<%= link_to 'Delete', [comment.post, comment], method: :delete, data: {confirm: 'Are you sure?'}, remote: true %>

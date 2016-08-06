@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
-  def show   
+  def show
     @user = User.find(params[:id])
     @posts = @user.posts.paginate(page: params[:page])
   end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update_attributes(user_params)
-        format.html { redirect_back_or_to @user, notice: "User was succesfully updated" }
+        format.html { redirect_to @user, notice: "User was succesfully updated" }
         format.js
       else
         format.html { render :edit }
