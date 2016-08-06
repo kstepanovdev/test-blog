@@ -1,15 +1,19 @@
-<h1>Log In</h1>
+<h1 id="form">Log In</h1>
 
-<%= form_for(:session, url: sessions_path) do |f| %>
-  
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <%= form_for(:session, url: sessions_path) do |f| %>
 
-  <%= f.submit "Sign in" %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
 
-<% end %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
 
-<div> New user? <%= link_to "Sign up now!", signup_path %> </div>
+      <%= f.submit "Sign in" %>
+    <% end %>
+    <div> New user? <%= link_to "Sign up now!", signup_path %> </div>
+
+  </div>
+</div>

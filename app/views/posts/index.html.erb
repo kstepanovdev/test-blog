@@ -1,3 +1,6 @@
-<% @posts.each do |post| %>
-  <div><%= post.content %></div>
+<% if @posts.any? %>
+  <h3>Posts (<%= @posts.count %>)</h3>
+  <%= render @posts %>
+<% else %>
+  <h1>No one post are not created yet!</h1>
 <% end %>

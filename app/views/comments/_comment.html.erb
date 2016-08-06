@@ -1,0 +1,14 @@
+<% @post.comments.each do |comment| %>
+  <div id="comment-<%= comment.id %>">
+    <div>
+      <%= gravatar_for comment.user, size: 35 %>
+      <%= comment.user.nickname %>
+    </div>
+    <%= comment.content %>
+    <% if current_user == comment.user || current_user.admin? %>
+        |<%= link_to 'Edit', edit_post_comment_url(comment.post, comment) %>
+        |<%= link_to 'Delete', [comment.post, comment], method: :delete, data: {confirm: 'Are you sure?'}, remote: true %>
+    <% end %>
+    <hr>
+  </div>
+<% end %>

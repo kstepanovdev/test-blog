@@ -1,4 +1,12 @@
-<div><%= gravatar_for @user %></div>
+<div><%= gravatar_for @user, size: 70 %></div>
 <div><%= @user.nickname %></div>
-<div><%= @user.email %></div>
-      
+
+<% if @user.posts.any? %>
+  <h3>Posts (<%= @user.posts.count %>)</h3>
+  <ul class="posts">
+    <%= render @posts %>
+  </ul>
+  <%= will_paginate @posts %>
+<% else %>
+  This users has not any post yet.
+<% end %>
