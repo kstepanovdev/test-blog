@@ -25,4 +25,28 @@ module SessionsHelper
     self.current_user = nil
   end
 
+  def redirect_back_or_to(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
+  end
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to login_url, notice: "Please log in."
+    end
+  end
+
+  def required_login
+    redirect_to login_path, notice: "Please log in." unless signed_in?
+  end
+
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
+
 end
