@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.destroy
         format.html { redirect_to @comment.post }
-        format.js {}
+        kformat.js {}
       end
     end
   end

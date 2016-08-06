@@ -1,6 +1,10 @@
 <% if @posts.any? %>
+  <%= will_paginate %>
+
   <h3>Posts (<%= @posts.count %>)</h3>
   <%= render @posts %>
+
+  <%= will_paginate %>
 <% else %>
   <h1>No one post are not created yet!</h1>
 <% end %>
