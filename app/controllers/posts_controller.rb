@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :fetch_post, only: [:edit, :update, :destroy]
+  before_action :fetch_post, only: [:show, :edit, :update, :destroy]
   before_action :required_login, only: [:edit, :update, :destroy]
   before_action :signed_in_user
   
@@ -7,8 +7,7 @@ class PostsController < ApplicationController
     @posts = Post.paginate(page: params[:page])
   end
 
-  def show
-    @post = Post.find(params[:id])
+  def show 
     @comment = current_user.comments.new
   end
 

@@ -11,8 +11,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = current_user.comments.create!(comment_params)
-    if @comment.save
+    if @comment = current_user.comments.create!(comment_params) 
       redirect_back_or_to @comment.post
     else
       render :new
@@ -20,7 +19,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update!(comment_params)
+    if @comment.update(comment_params)
       redirect_back_or_to @comment.post
     else
       render :edit
